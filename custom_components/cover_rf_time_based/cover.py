@@ -437,7 +437,7 @@ class CoverTimeBased(CoverEntity, RestoreEntity):
             if self._cover_entity_id is not None:
                 await self.hass.services.async_call("cover", "close_cover", {"entity_id": self._cover_entity_id}, False)
             else:
-                await self.hass.services.async_call("homeassistant", "turn_on", {"entity_id": self._close_script_entity_id, "variables": {"source": self._unique_id, "command": "close"}}, False)
+                await self.hass.services.async_call("homeassistant", "turn_on", {"entity_id": self._close_script_entity_id, "variables": {"source": self._name, "command": "close"}}, False)
 
         elif command == "open_cover":
             cmd = "UP"
@@ -445,7 +445,7 @@ class CoverTimeBased(CoverEntity, RestoreEntity):
             if self._cover_entity_id is not None:
                 await self.hass.services.async_call("cover", "open_cover", {"entity_id": self._cover_entity_id}, False)
             else:
-                await self.hass.services.async_call("script", "turn_on", {"entity_id": self._open_script_entity_id, "variables": {"source": self._unique_id, "command": "open"}}, False)
+                await self.hass.services.async_call("script", "turn_on", {"entity_id": self._open_script_entity_id, "variables": {"source": self._name, "command": "open"}}, False)
 
         elif command == "stop_cover":
             cmd = "STOP"
@@ -453,7 +453,7 @@ class CoverTimeBased(CoverEntity, RestoreEntity):
             if self._cover_entity_id is not None:
                 await self.hass.services.async_call("cover", "stop_cover", {"entity_id": self._cover_entity_id}, False)
             else:
-                await self.hass.services.async_call("homeassistant", "turn_on", {"entity_id": self._stop_script_entity_id, "variables": {"source": self._unique_id, "command": "stop"}}, False)
+                await self.hass.services.async_call("homeassistant", "turn_on", {"entity_id": self._stop_script_entity_id, "variables": {"source": self._name, "command": "stop"}}, False)
 
         _LOGGER.debug(self._name + ': ' + '_async_handle_command :: %s', cmd)
 
